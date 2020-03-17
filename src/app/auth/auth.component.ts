@@ -1,5 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {ServiceInteractService} from '../service-interact.service';
+import {Component} from '@angular/core';
 import {AuthService} from '../auth.service';
 
 @Component({
@@ -9,21 +8,15 @@ import {AuthService} from '../auth.service';
 })
 export class AuthComponent {
 
-  username: string;
-  email: string;
-  password: string;
-
   constructor(private authService: AuthService) {
   }
 
   signUp(username, email, password) {
     this.authService.onSignUp({username, password, email})
       .subscribe((obs: any) => {
-        localStorage.setItem('token', obs.user.token);
         console.log(obs);
+        localStorage.setItem('token', obs.user.token);
       });
   }
-
-
 
 }

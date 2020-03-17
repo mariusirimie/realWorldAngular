@@ -1,5 +1,3 @@
-import {objectKeys} from 'codelyzer/util/objectKeys';
-
 export class ArticleModel {
   dataslug: string;
   title: string;

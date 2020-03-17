@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ArticleSelectService} from '../../article-select.service';
 import moment from 'moment';
+import {ManageArticlesService} from '../../manage-articles.service';
 
 @Component({
   selector: 'app-article-preview',
@@ -13,7 +14,8 @@ export class ArticlePreviewComponent implements OnInit {
   likes: number;
   date: string;
 
-  constructor(private articleSelectService: ArticleSelectService) {
+  constructor(private articleSelectService: ArticleSelectService,
+              private manageArticles: ManageArticlesService) {
   }
 
   ngOnInit() {
@@ -23,6 +25,10 @@ export class ArticlePreviewComponent implements OnInit {
 
   selectArticle() {
     this.articleData = this.articleSelectService.selectArticle(this.articleData);
+  }
+
+  favoriteArticle(slug: string) {
+    this.manageArticles.markAsFavourite(slug).subscribe(obs => console.log(obs));
   }
 
 }

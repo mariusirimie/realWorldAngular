@@ -12,13 +12,14 @@
       </div>
     </div>
 
-    <hr />
+    <hr/>
 
     <div class="article-actions">
       <div class="article-meta">
-        <a href="profile.html"><img src="http://i.imgur.com/Qr71crq.jpg" /></a>
+        <a routerLink="{{ '/../profiles/' + articleData?.author.username }}"><img src="http://i.imgur.com/Qr71crq.jpg"/></a>
         <div class="info">
-          <a href="" class="author">{{ article?.author.username }}</a>
+          <a routerLink="{{ '/../profiles/' + articleData?.author.username }}"
+             class="author">{{ article?.author.username }}</a>
           <span class="date">{{ article?.createdAt }}</span>
         </div>
 
@@ -28,7 +29,7 @@
           Follow {{ article?.author.username }} <span class="counter">(10)</span>
         </button>
         &nbsp;
-        <button class="btn btn-sm btn-outline-primary">
+        <button class="btn btn-sm btn-outline-primary" (click)="markAsFavorite(article?.slug)">
           <i class="ion-heart"></i>
           &nbsp;
           Favorite Post <span class="counter">(29)</span>

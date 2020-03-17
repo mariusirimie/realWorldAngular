@@ -20,19 +20,6 @@ export class ServiceInteractService {
     });
   }
 
-  onFetchPosts() {
-    return this.http
-      .get(this.url + '/articles')
-      .pipe(map((responseData: any) => {
-        this.articlesNumber = responseData.articlesCount;
-        const postArray = [];
-        for (const article of responseData.articles) {
-          postArray.push(article);
-        }
-        return postArray;
-      }));
-  }
-
   onFetchPaginatedPosts(page: number, offset: number) {
     return this.http
       .get(this.url + '/articles?limit=' + page * 20 + '&offset=' + offset * 20)

@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {ManageArticlesService} from '../../manage-articles.service';
 
 @Component({
   selector: 'app-comment-banner',
@@ -9,10 +10,14 @@ export class CommentBannerComponent implements OnInit {
 
   @Input('articleData') articleData;
 
-  constructor() {
+  constructor(private mangageArticle: ManageArticlesService) {
   }
 
   ngOnInit() {
+  }
+
+  markAsFavorite(slug: string) {
+    this.mangageArticle.markAsFavourite(slug).subscribe(obs => console.log(obs));
   }
 
 }

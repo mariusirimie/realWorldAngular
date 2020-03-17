@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute} from '@angular/router';
 
@@ -11,7 +11,8 @@ export class AuthService {
   token: string;
 
   constructor(private http: HttpClient,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute) {
+  }
 
   onSignUp(data: { username: string, password: string, email: string }) {
     return this.http.post(this.url + '/users', {
@@ -22,4 +23,9 @@ export class AuthService {
       }
     });
   }
+
+  isAuthenticated() {
+    return this.token !== null;
+  }
+
 }

@@ -4,9 +4,11 @@
     <h1>{{ articleData?.title }}</h1>
 
     <div class="article-meta">
-      <a href=""><img src="http://i.imgur.com/Qr71crq.jpg" /></a>
+      <a routerLink="{{ '/../profiles/' + articleData?.author.username }}"><img
+        src="http://i.imgur.com/Qr71crq.jpg"/></a>
       <div class="info">
-        <a href="" class="author">{{ articleData?.author.username }}</a>
+        <a routerLink="{{ '/../profiles/' + articleData?.author.username }}"
+           class="author">{{ articleData?.author.username }}</a>
         <span class="date">{{ articleData?.createdAt }}</span>
       </div>
       <button class="btn btn-sm btn-outline-secondary">
@@ -15,7 +17,7 @@
         Follow {{ articleData?.author.username }} <span class="counter">(10)</span>
       </button>
       &nbsp;&nbsp;
-      <button class="btn btn-sm btn-outline-primary">
+      <button class="btn btn-sm btn-outline-primary" (click)="markAsFavorite(articleData?.slug)">
         <i class="ion-heart"></i>
         &nbsp;
         Favorite Post <span class="counter">(29)</span>

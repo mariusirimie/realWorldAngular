@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ArticleSelectService} from '../article-select.service';
 import {ActivatedRoute, Params} from '@angular/router';
+import {ManageArticlesService} from '../manage-articles.service';
+import {isFatalDiagnosticError} from '@angular/compiler-cli/src/ngtsc/diagnostics';
 
 @Component({
   selector: 'app-read-more',
@@ -13,7 +15,8 @@ export class ReadMoreComponent implements OnInit {
   params: Params;
 
   constructor(private articleSelectService: ArticleSelectService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private manageArticlesService: ManageArticlesService) {
   }
 
   ngOnInit() {
@@ -21,6 +24,7 @@ export class ReadMoreComponent implements OnInit {
     if (!(this.articleSelectService.selectedArticle && this.params)) {
       this.articleSelectService.getArticle(this.params.slug).then(data => {
         this.article = data;
+        console.log(data);
       });
     }
     this.articleSelectService
@@ -28,6 +32,10 @@ export class ReadMoreComponent implements OnInit {
       .then(data => {
         this.article = data;
       });
+  }
+
+  markAsFavorite(slug: string) {
+    this.manageArticlesService.markAsFavourite(slug).subscribe(obs => console.log(obs));
   }
 
 }
