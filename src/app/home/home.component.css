@@ -5,3 +5,9 @@
 .article-preview:last-of-type {
   border-bottom: none;
 }
+
+.pagination {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}

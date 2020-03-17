@@ -5,15 +5,12 @@
   <div class="container page">
     <div class="row">
 
-
       <div class="col-md-9">
         <div class="feed-toggle">
           <ul class="nav nav-pills outline-active">
-            <li class="nav-item">
-              <a class="nav-link disabled" href="">Your Feed</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="">Global Feed</a>
+            <li class="nav-item" *ngFor="let tab of tabs">
+              <a class="nav-link " [ngClass]="(tab === selectedTag) ? 'active' : 'inactive'"
+                 (click)="clearTabs()">{{ tab }}</a>
             </li>
           </ul>
         </div>
@@ -23,12 +20,15 @@
         </div>
       </div>
 
-
       <div class="col-md-3">
-        <app-tags></app-tags>
+        <app-tags (onTagSelected)="getList($event)"></app-tags>
       </div>
 
-
+    </div>
+    <div class="pagination">
+      <a *ngFor="let item of [].constructor(10); let i = index" (click)="getPageNumber(i + 1)">
+        {{i + 1}}
+      </a>
     </div>
   </div>
 

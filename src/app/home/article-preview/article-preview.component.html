@@ -1,15 +1,16 @@
 <div class="article-meta">
   <a href="profile.html"><img src="http://i.imgur.com/N4VcUeJ.jpg"/></a>
   <div class="info">
-    <a href="" class="author">{{ articleData.title }}</a>
+    <a href="" class="author" routerLink="{{ '/#/article/' + articleData?.dataslug }}">{{ articleData.title }}</a>
     <span class="date">{{ date }}</span>
   </div>
   <button class="btn btn-outline-primary btn-sm pull-xs-right">
     <i class="ion-heart"></i> {{ likes }}
   </button>
 </div>
-<a routerLink="{{ '/#/article/' + articleData.id }}" class="preview-link" (click)="selectArticle()">
-  <p>{{ articleData.content }}</p>
+<a routerLink="{{ '/#/article/' + articleData?.dataslug }}" class="preview-link" (click)="selectArticle()">
+  <p>{{ articleData.body }}</p>
   <span>Read more...</span>
 </a>
-<div class="tag-default tag-pill tag-outline" *ngFor="let tag of articleData.tags" style="float: right">{{ tag }}</div>
+<div class="tag-default tag-pill tag-outline" *ngFor="let tag of articleData.tagList"
+     style="float: right">{{ tag }}</div>

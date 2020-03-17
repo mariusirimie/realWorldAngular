@@ -23,7 +23,8 @@ export class ReadMoreComponent implements OnInit {
         this.article = data;
       });
     }
-    this.articleSelectService.getArticle(this.articleSelectService.selectedArticle ? this.articleSelectService.selectedArticle.id : null)
+    this.articleSelectService
+      .getArticle(this.articleSelectService.selectedArticle ? this.articleSelectService.selectedArticle.dataslug : null)
       .then(data => {
         this.article = data;
       });

@@ -13,10 +13,4 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  createArticles() {
-    this.articleSelectService.createArticle().subscribe( (response: any) => {
-      console.log(response);
-    });
-  }
-
 }

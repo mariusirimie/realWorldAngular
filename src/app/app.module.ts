@@ -14,10 +14,15 @@ import { CommentBannerComponent } from './read-more/comment-banner/comment-banne
 import { CommentsComponent } from './read-more/comments/comments.component';
 import { AddCommentComponent } from './read-more/add-comment/add-comment.component';
 import {HttpClientModule} from '@angular/common/http';
+import { AuthComponent } from './auth/auth.component';
+import {FormsModule} from '@angular/forms';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
-  { path: '#/article/:slug', component: ReadMoreComponent}
+  { path: '#/article/:slug', component: ReadMoreComponent},
+  { path: '#/login', component: AuthComponent},
+  { path: '#/user-profile', component: UserProfileComponent}
 ];
 
 @NgModule({
@@ -32,12 +37,15 @@ const routes: Routes = [
     BannerComponent,
     CommentBannerComponent,
     CommentsComponent,
-    AddCommentComponent
+    AddCommentComponent,
+    AuthComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

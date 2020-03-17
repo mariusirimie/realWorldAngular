@@ -20,10 +20,10 @@ export class AddCommentComponent implements OnInit {
     });
   }
 
-  addComment(comment: string) {
-    this.articleInteract.updateArticle(comment, this.params.slug).subscribe( res => {
-      console.log(res);
-    });
-  }
+  // addComment(comment: string) {
+  //   this.articleInteract.updateArticle(comment, this.params.slug).subscribe( res => {
+  //     console.log(res);
+  //   });
+  // }
 
 }

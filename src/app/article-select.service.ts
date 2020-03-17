@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {ServiceInteractService} from './service-interact.service';
 import {HttpClient} from '@angular/common/http';
+import {ArticleModel} from './article.model';
+import {debug} from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -8,44 +10,28 @@ import {HttpClient} from '@angular/common/http';
 export class ArticleSelectService {
 
   selectedArticle: any;
+  articleCount: number;
 
-  constructor(private serviceInteractService: ServiceInteractService,
-              http: HttpClient) {
+  constructor(private serviceInteractService: ServiceInteractService) {
   }
 
   selectArticle(article) {
-    console.log(article);
     this.selectedArticle = article;
   }
 
-  createArticle() {
-    return this.serviceInteractService.onCreatePost({
-      title: 'This is a New Dummy Post',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,' +
-        'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ' +
-        'Ut enim ad minim veniam, quis nostrud exercitation ullamco.',
-      tags: ['programming', 'javascript', 'angular', 'react'],
-      comments: ['This is a first comment.', 'This is a second comment']
-    });
+  getPaginatedArticles(currentPage: number, nextPage: number) {
+    this.articleCount = this.serviceInteractService.articlesNumber;
+    return this.serviceInteractService.onFetchPaginatedPosts(nextPage, currentPage);
   }
 
-  updateArticle(data: any, id: string) {
-    return this.serviceInteractService.onUpdatePost([id, data]);
+  getFilteredArticles(filter: string) {
+    return this.serviceInteractService.onFetchFilteredByTagPosts(filter);
   }
 
-  getArticles() {
-    return this.serviceInteractService.onFetchPosts();
-  }
-
-  getArticle(id: string) {
+  getArticle(slug: string) {
     return new Promise(subs => {
-      this.serviceInteractService.onFetchPosts().subscribe((response: any) => {
-        for (const obj of response) {
-          if (obj && id && obj.id === id) {
-            console.log(response);
-            subs(obj);
-          }
-        }
+      this.serviceInteractService.onFetchPost(slug).subscribe((response: any) => {
+        subs(response);
       });
     });
   }
