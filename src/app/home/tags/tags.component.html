@@ -1,0 +1,7 @@
+<div class="sidebar">
+  <p>Popular Tags</p>
+
+  <div class="tag-list">
+    <p href="" class="tag-pill tag-default" *ngFor="let tag of tags" (click)="selectTag(tag)">{{ tag }}</p>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+.article-preview {
+  border-bottom: 1px solid black;
+}
+
+.article-preview:last-of-type {
+  border-bottom: none;
+}

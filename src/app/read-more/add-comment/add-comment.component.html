@@ -1,0 +1,11 @@
+<form class="card comment-form">
+  <div class="card-block">
+    <textarea class="form-control" placeholder="Write a comment..." rows="3" #comment></textarea>
+  </div>
+  <div class="card-footer">
+    <img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img" />
+    <div class="btn btn-sm btn-primary" (click)="addComment(comment.value)">
+      Post Comment
+    </div>
+  </div>
+</form>

@@ -1,0 +1,11 @@
+{
+  "/posts/*": {
+    "target": "https://angulartut-d4fc5.firebaseio.com/",
+    "secure": false,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/posts": ""
+    }
+  },
+  "changeOrigin": true
+}
