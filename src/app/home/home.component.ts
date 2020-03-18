@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ArticleSelectService} from '../article-select.service';
 import {ArticleModel} from '../article.model';
+import {ManageArticlesService} from '../manage-articles.service';
 
 @Component({
   selector: 'app-home',
@@ -10,51 +10,50 @@ import {ArticleModel} from '../article.model';
 export class HomeComponent implements OnInit {
 
   articles: ArticleModel[];
+  pages: number;
   currentPage: number;
   tabs: string[] = ['Global Feed'];
   selectedTag: string;
 
-  constructor(private articleSelectService: ArticleSelectService) {
+  constructor(private manageArticlesService: ManageArticlesService) {
   }
 
   ngOnInit() {
     this.currentPage = 1;
     this.selectedTag = this.tabs[0];
-    this.articleSelectService.getPaginatedArticles(this.currentPage - 1, 1).subscribe((response: any) => {
-      this.articles = response.map((item: any) => {
-        return new ArticleModel(item);
-      });
+    this.manageArticlesService.onFetchPaginatedPosts(1).subscribe((response: ArticleModel[]) => {
+      this.articles = response;
     });
   }
 
   getList(tag: string) {
-    this.tabs.push(tag);
-    this.selectedTag = tag;
-    this.articleSelectService.getFilteredArticles(tag).subscribe((response: any) => {
-      console.log(response);
-      this.articles = [];
-      this.articles = response.articles.map((item: any) => {
-        return new ArticleModel(item);
+    if (this.tabs.indexOf(tag) === -1) {
+      this.tabs.push(tag);
+      this.selectedTag = tag;
+      this.manageArticlesService.onFetchFilteredByTagPosts(tag).subscribe((response: ArticleModel[]) => {
+        this.articles = response;
       });
-    });
+    }
   }
 
-  clearTabs() {
-    this.tabs = ['Global Feed'];
-    this.selectedTag = this.tabs[0];
-    this.articleSelectService.getPaginatedArticles(this.currentPage - 1, 1).subscribe((response: any) => {
-      this.articles = response.map((item: any) => {
-        return new ArticleModel(item);
+  selectTab(tag: string) {
+    if (tag === 'Global Feed') {
+      this.tabs = ['Global Feed'];
+      this.selectedTag = tag;
+      this.manageArticlesService.onFetchPaginatedPosts(this.currentPage - 1).subscribe((response: ArticleModel[]) => {
+        this.articles = response;
       });
-    });
+    } else {
+      this.selectedTag = tag;
+      this.manageArticlesService.onFetchFilteredByTagPosts(tag).subscribe((response: ArticleModel[]) => {
+        this.articles = response;
+      });
+    }
   }
 
   getPageNumber(pageNumber: number) {
-    this.articleSelectService.getPaginatedArticles(this.currentPage, pageNumber).subscribe((response: any) => {
-      this.articles = [];
-      this.articles = response.map((item: any) => {
-        return new ArticleModel(item);
-      });
+    this.manageArticlesService.onFetchPaginatedPosts(this.currentPage).subscribe((response: ArticleModel[]) => {
+      this.articles = response;
     });
     this.currentPage = pageNumber;
   }

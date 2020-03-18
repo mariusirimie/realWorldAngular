@@ -20,8 +20,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
-  { path: '#/article/:slug', component: ReadMoreComponent},
-  { path: '#/login', component: AuthComponent},
+  { path: 'article/:slug', component: ReadMoreComponent},
+  { path: 'login', component: AuthComponent},
   { path: 'profiles/:slug', component: UserProfileComponent}
 ];
 

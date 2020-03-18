@@ -1,14 +1,16 @@
 <div class="article-meta">
   <a href="profile.html"><img src="http://i.imgur.com/N4VcUeJ.jpg"/></a>
   <div class="info">
-    <a href="" class="author" routerLink="{{ '/#/article/' + articleData?.dataslug }}">{{ articleData.title }}</a>
-    <span class="date">{{ date }}</span>
+    <a href="" class="author"
+       routerLink="{{ 'profiles/' + articleData?.author.username }}">{{ articleData?.author.username }}</a>
+    <span class="date">{{ articleData?.createdAt }}</span>
   </div>
-  <button class="btn btn-outline-primary btn-sm pull-xs-right" (click)="favoriteArticle(articleData?.dataslug)">
-    <i class="ion-heart"></i> {{ likes }}
+  <button class="btn btn-outline-primary btn-sm pull-xs-right" (click)="favoriteArticle(articleData?.slug)">
+    <i class="ion-heart"></i> {{ articleData?.favoritesCount }}
   </button>
 </div>
-<a routerLink="{{ '/#/article/' + articleData?.dataslug }}" class="preview-link" (click)="selectArticle()">
+<a routerLink="{{ 'article/' + articleData?.slug }}"><h4 style="color: black">{{ articleData?.title }}</h4></a>
+<a routerLink="{{ 'article/' + articleData?.slug }}" class="preview-link" (click)="selectArticle()">
   <p>{{ articleData.body }}</p>
   <span>Read more...</span>
 </a>

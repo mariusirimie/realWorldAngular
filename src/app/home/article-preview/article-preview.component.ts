@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ArticleSelectService} from '../../article-select.service';
 import moment from 'moment';
 import {ManageArticlesService} from '../../manage-articles.service';
+import {AuthService} from '../../auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-article-preview',
@@ -14,8 +15,9 @@ export class ArticlePreviewComponent implements OnInit {
   likes: number;
   date: string;
 
-  constructor(private articleSelectService: ArticleSelectService,
-              private manageArticles: ManageArticlesService) {
+  constructor(private manageArticles: ManageArticlesService,
+              private authService: AuthService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -24,11 +26,15 @@ export class ArticlePreviewComponent implements OnInit {
   }
 
   selectArticle() {
-    this.articleData = this.articleSelectService.selectArticle(this.articleData);
+    this.manageArticles.selectArticle(this.articleData);
   }
 
   favoriteArticle(slug: string) {
-    this.manageArticles.markAsFavourite(slug).subscribe(obs => console.log(obs));
+    if ( this.authService.isAuthenticated() ) {
+      this.manageArticles.markAsFavourite(slug).subscribe(obs => console.log(obs));
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 
 }

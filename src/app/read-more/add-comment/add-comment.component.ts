@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {ArticleSelectService} from '../../article-select.service';
 import {ActivatedRoute, Params} from '@angular/router';
 
 @Component({
@@ -11,19 +10,12 @@ export class AddCommentComponent implements OnInit {
 
   params: Params;
 
-  constructor(private articleInteract: ArticleSelectService,
-              private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.params.subscribe(p => {
       this.params = p;
     });
   }
-
-  // addComment(comment: string) {
-  //   this.articleInteract.updateArticle(comment, this.params.slug).subscribe( res => {
-  //     console.log(res);
-  //   });
-  // }
 
 }

@@ -10,8 +10,7 @@ export class AuthService {
   url = 'https://conduit.productionready.io/api';
   token: string;
 
-  constructor(private http: HttpClient,
-              private route: ActivatedRoute) {
+  constructor(private http: HttpClient) {
   }
 
   onSignUp(data: { username: string, password: string, email: string }) {
@@ -25,6 +24,7 @@ export class AuthService {
   }
 
   isAuthenticated() {
+    this.token = localStorage.getItem('token');
     return this.token !== null;
   }
 

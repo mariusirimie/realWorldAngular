@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ArticleSelectService} from '../article-select.service';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +8,7 @@ import {ArticleSelectService} from '../article-select.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private articleSelectService: ArticleSelectService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
